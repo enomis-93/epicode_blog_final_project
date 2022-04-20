@@ -1,6 +1,7 @@
 @import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 
 body {
+  background-color: rgb(56, 56, 56);
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
@@ -12,4 +13,14 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+.light-mode {
+  background-color: #efefef;
+  color: #222;
+}
+
+.dark-mode {
+  background-color: #111;
+  color: #d4d3d3;
 }

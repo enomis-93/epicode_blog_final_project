@@ -1,21 +1,30 @@
 import React from "react";
 import { useEffect, useState } from "react";
+import { NavDropdown } from "react-bootstrap";
+import { Link } from "react-router-dom";
+import Categories from "../categories/Categories";
 
-export default function Navbar() {
-  const [pages, setPages] = useState([]);
-
+export default function Navbar({
+  activeCategory,
+  posts,
+  setPostsFiltered,
+  setActiveCategory,
+}) {
   useEffect(() => {
-    getPages();
-  }, []);
+    if (activeCategory === 0) {
+      setPostsFiltered(posts);
+      return;
+    }
 
-  const getPages = async () => {
-    const response = await fetch("http://wordpress.test/wp-json/wp/v2/pages");
-    const pages = await response.json();
-    setPages(pages);
-  };
+    const filtered = posts.filter((post) =>
+      post.categories.includes(activeCategory)
+    );
+    //console.log(filtered);
+    setPostsFiltered(filtered);
+  }, [activeCategory]);
 
   return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-light">
+    <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
       <div className="container-fluid">
         <a className="navbar-brand" href="#">
           Blog
@@ -34,34 +43,30 @@ export default function Navbar() {
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav">
             <li className="nav-item">
-              <a className="nav-link active" aria-current="page" href="#">
-                Home
-              </a>
-            </li>
-            <li className="nav-item dropdown">
-              <a
-                className="nav-link dropdown-toggle"
-                href="#"
-                id="navbarDropdown"
-                role="button"
-                data-toggle="dropdown"
-                aria-haspopup="true"
-                aria-expanded="false"
+              <Link
+                onClick={() => setActiveCategory(0)}
+                className="nav-link"
+                to="/"
               >
-                Categories
-              </a>
-              <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a className="dropdown-item" href="#">
-                  Action
-                </a>
-                <a className="dropdown-item" href="#">
-                  Another action
-                </a>
-                <div className="dropdown-divider"></div>
-                <a className="dropdown-item" href="#">
-                  Something else here
-                </a>
-              </div>
+                Home
+              </Link>
+            </li>
+            <NavDropdown
+              id="nav-dropdown-dark-example"
+              title="Categories"
+              menuVariant="dark"
+            >
+              <Categories setActiveCategory={setActiveCategory} />
+            </NavDropdown>
+            <li className="nav-item">
+              <Link className="nav-link" to="about-us">
+                About Us
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link className="nav-link" to="contacts">
+                Contacts
+              </Link>
             </li>
           </ul>
         </div>
