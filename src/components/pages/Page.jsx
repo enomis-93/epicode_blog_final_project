@@ -23,7 +23,7 @@ export const Page = () => {
   return (
     <div className="container my-3 text-white">
       {page.map((page) => (
-        <div>
+        <div key={page.id}>
           <h1 dangerouslySetInnerHTML={{ __html: page.title.rendered }} />
           <div dangerouslySetInnerHTML={{ __html: page.content.rendered }} />
         </div>

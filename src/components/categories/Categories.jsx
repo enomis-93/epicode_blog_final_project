@@ -18,13 +18,10 @@ function Categories(props) {
   };
   //console.log(categories);
   return categories.map((category) => (
-    <NavDropdown.Item
-      key={category.id}
-      onClick={() => props.setActiveCategory(category.id)}
-    >
+    <NavDropdown.Item key={category.id}>
       <Link
         className="text-reset text-decoration-none"
-        to={`/posts/${category.id}`}
+        to={`/posts/category/${category.id}`}
       >
         {category.name}
       </Link>

@@ -4,31 +4,13 @@ import { NavDropdown } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import Categories from "../categories/Categories";
 
-export default function Navbar({
-  activeCategory,
-  posts,
-  setPostsFiltered,
-  setActiveCategory,
-}) {
-  useEffect(() => {
-    if (activeCategory === 0) {
-      setPostsFiltered(posts);
-      return;
-    }
-
-    const filtered = posts.filter((post) =>
-      post.categories.includes(activeCategory)
-    );
-    //console.log(filtered);
-    setPostsFiltered(filtered);
-  }, [activeCategory]);
-
+export default function Navbar() {
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
       <div className="container-fluid">
-        <a className="navbar-brand" href="#">
+        <Link className="navbar-brand" to="/">
           Blog
-        </a>
+        </Link>
         <button
           className="navbar-toggler"
           type="button"
@@ -43,11 +25,7 @@ export default function Navbar({
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav">
             <li className="nav-item">
-              <Link
-                onClick={() => setActiveCategory(0)}
-                className="nav-link"
-                to="/"
-              >
+              <Link className="nav-link" to="/">
                 Home
               </Link>
             </li>
@@ -56,7 +34,7 @@ export default function Navbar({
               title="Categories"
               menuVariant="dark"
             >
-              <Categories setActiveCategory={setActiveCategory} />
+            <Categories />
             </NavDropdown>
             <li className="nav-item">
               <Link className="nav-link" to="about-us">
