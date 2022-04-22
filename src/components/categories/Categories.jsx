@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { NavDropdown } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import { getCategories } from "../../functions/getCategories";
 
 function Categories(props) {
   const [categories, setCategories] = useState([]);
@@ -9,13 +10,8 @@ function Categories(props) {
     getCategories();
   }, []);
 
-  const getCategories = async () => {
-    const response = await fetch(
-      "http://wordpress.test/wp-json/wp/v2/categories"
-    );
-    const categories = await response.json();
-    setCategories(categories);
-  };
+  getCategories().then((categories) => setCategories(categories));
+
   //console.log(categories);
   return categories.map((category) => (
     <NavDropdown.Item key={category.id}>

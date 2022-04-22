@@ -4,7 +4,6 @@ import Post from "../post/Post";
 
 export default function PostList() {
   const { category } = useParams();
-  console.log(category);
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {

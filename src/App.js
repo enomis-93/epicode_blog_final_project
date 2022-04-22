@@ -15,7 +15,7 @@ function App() {
           <Route path="/posts/category/:category" element={<PostsList />} />
         </Route>
 
-        <Route path="/:slug" element={<Page />} />
+        <Route path="page/:slug" element={<Page />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
       <Footer />

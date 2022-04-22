@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
+import { getPage } from "../../functions/getPage";
 
 export const Page = () => {
   const { slug } = useParams();
@@ -9,16 +10,11 @@ export const Page = () => {
   const [page, setPage] = useState([]);
 
   useEffect(() => {
-    getPage();
+    getPage(slug);
   }, [slug]);
 
-  const getPage = async () => {
-    const response = await fetch(
-      `http://wordpress.test/wp-json/wp/v2/pages/?slug=${slug}`
-    );
-    const page = await response.json();
-    setPage(page);
-  };
+  getPage(slug).then((page) => setPage(page));
+
   //console.log(page);
   return (
     <div className="container my-3 text-white">
