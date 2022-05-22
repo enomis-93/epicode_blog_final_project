@@ -5,6 +5,7 @@ import Post from "../post/Post";
 export default function PostList() {
   const { category } = useParams();
   const [posts, setPosts] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     getPosts();
@@ -19,14 +20,17 @@ export default function PostList() {
     console.log(response);
     const posts = await response.json();
     setPosts(posts);
+    setIsLoading(true);
   };
   console.log(posts);
 
-  return (
+  return isLoading ? (
     <div className="row justify-content-center my-3 mb-5">
       {posts.map((post) => (
         <Post key={post.id} post={post} />
       ))}
     </div>
+  ) : (
+    <h4 className="text-white m-5 text-center">Loading...</h4>
   );
 }

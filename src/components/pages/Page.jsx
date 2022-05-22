@@ -8,15 +8,16 @@ export const Page = () => {
   //console.log(slug);
 
   const [page, setPage] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    getPage(slug);
+    getPage(slug)
+      .then((page) => setPage(page))
+      .then(setIsLoading(true));
   }, [slug]);
 
-  getPage(slug).then((page) => setPage(page));
-
-  //console.log(page);
-  return (
+  console.log(isLoading);
+  return isLoading ? (
     <div className="container my-3 text-white">
       {page.map((page) => (
         <div key={page.id}>
@@ -25,5 +26,7 @@ export const Page = () => {
         </div>
       ))}
     </div>
+  ) : (
+    <h4 className="text-white text-center m-5">Loading...</h4>
   );
 };

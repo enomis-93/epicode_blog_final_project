@@ -7,10 +7,8 @@ function Categories(props) {
   const [categories, setCategories] = useState([]);
 
   useEffect(() => {
-    getCategories();
+    getCategories().then((categories) => setCategories(categories));
   }, []);
-
-  getCategories().then((categories) => setCategories(categories));
 
   //console.log(categories);
   return categories.map((category) => (

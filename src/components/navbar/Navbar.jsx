@@ -9,10 +9,8 @@ export default function Navbar() {
   const [page, setPage] = useState([]);
 
   useEffect(() => {
-    getPage();
+    getPage().then((page) => setPage(page));
   }, []);
-
-  getPage().then((page) => setPage(page));
 
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
